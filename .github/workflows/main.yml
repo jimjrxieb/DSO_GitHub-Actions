@@ -31,19 +31,19 @@ jobs:
 
    - name: SonarQube Scan
      uses: sonarsource/sonarqube-scan-action@master
-      env:
+     env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-    - name: Install jq
-      run: sudo apt-get update && sudo apt-get install -y jq
+   - name: Install jq
+     run: sudo apt-get update && sudo apt-get install -y jq
 
-    - name: SonarQube Quality Gate check
-      id: sonarqube-quality-gate-check
-      uses: sonarsource/sonarqube-quality-gate-action@master
+   - name: SonarQube Quality Gate check
+     id: sonarqube-quality-gate-check
+     uses: sonarsource/sonarqube-quality-gate-action@master
       # Force to fail step after specific time.
-      timeout-minutes: 5
-      env:
+     timeout-minutes: 5
+     env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
@@ -84,15 +84,15 @@ jobs:
        name: docker-scout-findings
        path: scout-report.sarif
 
-    - name: Push Docker Image
-      run: |
+   - name: Push Docker Image
+     run: |
           docker push linksrobot/gh_actions:latest
 
-    - name: Kubectl Action
-      uses: tale/kubectl-action@v1
-      with:
+   - name: Kubectl Action
+     uses: tale/kubectl-action@v1
+     with:
         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-    - run: |
+   - run: |
         kubectl apply -f deployment-service.yaml -n webapps
         kubectl get svc -n webapps
 
