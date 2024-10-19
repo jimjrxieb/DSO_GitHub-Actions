@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
  sast_scan:
-   name: Run Bandit Scan
+   name: Run SAST Scans 
    runs-on: ubuntu-latest
 
    steps:
@@ -72,7 +72,13 @@ jobs:
      with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_CRED }}
-
+ 
+ push_and_deploy:
+   name: Push and Deploy
+   runs-on: ubuntu-latest
+   needs: sast_scan
+   
+   steps:
    - name: Push Docker Image
      run: |
           docker push linksrobot/gh_actions:latest
@@ -92,6 +98,12 @@ jobs:
      with:
        name: docker-scout-findings
        path: scout-report.sarif
+
+   push_and_deploy:
+    name: Push and Deploy
+    runs-on: ubuntu-latest
+    needs: sast_scan
+    steps:
 
    - name: Push Docker Image
      run: |
