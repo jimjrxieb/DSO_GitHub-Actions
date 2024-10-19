@@ -49,11 +49,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-   - name: Checkout code
-     uses: actions/checkout@main
-     with:
-        fetch-depth: 0
-      
    - name: TruffleHog Enterprise scan
      uses: trufflesecurity/TruffleHog-Enterprise-Github-Action@main
      with:
