@@ -80,22 +80,6 @@ jobs:
      with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_CRED }}
- 
-   - name: Docker Scout Scan
-     uses: docker/scout-action@v1.0.9
-     with:
-       dockerhub-user: ${{ secrets.DOCKER_USER }}
-       dockerhub-password: ${{ secrets.DOCKER_CRED }}
-       command: quickview,cves
-       only-severities: critical,high
-       sarif-file: scout-report.sarif
-
-   - name: Upload Artifact
-     uses: actions/upload-artifact@v3
-     if: always()
-     with:
-       name: docker-scout-findings
-       path: scout-report.sarif
 
  push_and_deploy:
    name: Push and Deploy
