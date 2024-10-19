@@ -29,9 +29,11 @@ jobs:
       name: bandit-findings
       path: bandit-report.json
 
+   - name: Install Trivy
+     run: curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb -o trivy.deb && sudo dpkg -i trivy.deb
+
    - name: Trivy FS scan
-     run: |
-        trivy fs --format table -o trivy-fs-report.html .
+     run: trivy fs .
 
    - name: SonarQube Scan
      uses: sonarsource/sonarqube-scan-action@master
