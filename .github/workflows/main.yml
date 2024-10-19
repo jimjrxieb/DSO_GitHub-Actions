@@ -7,7 +7,7 @@ jobs:
    name: Run Bandit Scan
    runs-on: ubuntu-latest
 
-   step:
+   steps:
    - name: Checkout code
      uses: actions/checkout@v2
 
