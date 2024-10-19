@@ -37,5 +37,5 @@ jobs:
           sonar-scanner \
             -Dsonar.projectKey=my_project_key \
             -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarqube.example.com \
+            -Dsonar.host.url=http://44.204.71.241:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
